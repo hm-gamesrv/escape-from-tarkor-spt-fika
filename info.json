@@ -1,0 +1,31 @@
+{
+    "schemaVersion": 1,
+    "key": "escape-from-tarkor-spt-fika",
+    "name": "Escape From Tarkor - Fika",
+    "registries": {
+        "ghcr": "ghcr.io/hm-gamesrv/",
+        "aliyun": "crpi-i9e7zrpnu4792a5m.cn-chengdu.personal.cr.aliyuncs.com/hiromuraki/"
+    },
+    "resources": {
+        "ports": [
+            {
+                "host": "6969",
+                "container": "6969",
+                "proto": "tcp",
+                "required": true,
+                "desc": "控制平面端口"
+            }
+        ],
+        "volumes": [],
+        "env": [],
+        "extraArgs": ""
+    },
+    "variants": [
+        {
+            "key": "SPT",
+            "name": "SPT 服务端",
+            "tag": "latest",
+            "container": "escape-from-tarkor-spt-fika-server"
+        }
+    ]
+}
