@@ -1,3 +1,6 @@
+# =========
+# Build
+# =========
 FROM alpine:3 AS build
 
 # 分片是 tar.zst 的纯字节切片，必须按 part-NNN 顺序拼接后才能解压
@@ -13,8 +16,13 @@ RUN apk add --no-cache zstd \
     && cat ./Fika.Server.Release.2.4.1.tar.zst.part-* | zstd -dc | tar -xf - \
     && rm -f ./*.tar.gz ./*.tar.zst.part-*
 
+# =========
+# Runtime
+# =========
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 
 COPY --from=build --chown=1000:100 /app /app
 
+WORKDIR /app
+USER 1000:1000
 CMD ["bash", "start-server.sh"]
